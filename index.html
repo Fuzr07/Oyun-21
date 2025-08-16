@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Seçim Oyunu Demo</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background: #f5f5f5;
+    }
+    .question {
+      font-size: 24px;
+      margin-bottom: 30px;
+      text-align: center;
+    }
+    .choices {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      width: 80%;
+      max-width: 400px;
+    }
+    .choice-btn {
+      padding: 20px;
+      font-size: 20px;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      background: #4caf50;
+      color: white;
+      transition: background 0.3s;
+    }
+    .choice-btn:hover {
+      background: #45a049;
+    }
+  </style>
+</head>
+<body>
+  <div class="question" id="question">Ormanda yürüyorsun. Hangi yöne gideceksin?</div>
+  <div class="choices" id="choices">
+    <button class="choice-btn" onclick="nextScene('left')">Sola Git</button>
+    <button class="choice-btn" onclick="nextScene('right')">Sağa Git</button>
+  </div>
+
+  <script>
+    function nextScene(choice) {
+      const question = document.getElementById("question");
+      const choices = document.getElementById("choices");
+
+      if (choice === "left") {
+        question.textContent = "Sola gittin ve gizemli bir mağara buldun!";
+        choices.innerHTML = '<button class="choice-btn" onclick="nextScene(\\'explore\\')">Mağarayı Keşfet</button>' +
+                            '<button class="choice-btn" onclick="nextScene(\\'back\\')">Geri Dön</button>';
+      } else if (choice === "right") {
+        question.textContent = "Sağa gittin ve küçük bir kulübeye rastladın.";
+        choices.innerHTML = '<button class="choice-btn" onclick="nextScene(\\'knock\\')">Kapıyı Çal</button>' +
+                            '<button class="choice-btn" onclick="nextScene(\\'ignore\\')">Yoluna Devam Et</button>';
+      } else if (choice === "explore") {
+        question.textContent = "Mağaranın içinde hazine buldun! Oyun bitti ✨";
+        choices.innerHTML = '';
+      } else if (choice === "back") {
+        question.textContent = "Tekrar başlangıç noktasına döndün.";
+        choices.innerHTML = '<button class="choice-btn" onclick="nextScene(\\'left\\')">Sola Git</button>' +
+                            '<button class="choice-btn" onclick="nextScene(\\'right\\')">Sağa Git</button>';
+      } else if (choice === "knock") {
+        question.textContent = "Kapıyı çaldın ve yaşlı bir bilge açtı. Sana büyülü bir asa verdi! ✨";
+        choices.innerHTML = '';
+      } else if (choice === "ignore") {
+        question.textContent = "Yoluna devam ettin ama bir şey bulamadın. Oyun bitti.";
+        choices.innerHTML = '';
+      }
+    }
+  </script>
+</body>
+</html>
